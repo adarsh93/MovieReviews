@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+
+    <h2>Movie Reviews</h2>
+
+    <label for="userInput">Movie Title:  </label><input type="text" id="userInput" ></input>
+    <label for="userInput1">Movie Year:  </label><input type="text" id="userInput1" ></input>
+    <button type="button" onclick="loadDoc()">Request data</button>
+
+    <br />
+    <br />
+    <label>Movie:  </label><label id="demo">should appear here</label>
+    <!--<p id="demo">should appear here</p>-->
+    <br />
+    <br />
+    <label>IMDB Rating:  </label><label id="demo1">should appear here1</label>
+    <br />
+    <br />
+    <label>Rotten Tomatoes Rating:  </label><label id="demo2">should appear here2</label>
+    <br />
+    <br />
+    <label>Metacritic Rating:  </label><label id="demo3">should appear here3</label>
+    <hr />
+    <br />
+    <h2>New York Times Review</h2>
+    <label>NYT Article Link:  </label><label id="demo4">should appear here4</label>
+    <br />
+    <a id="demo5" target="_blank">should appear here5</a>
+    <script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+		var myObj = JSON.parse(this.responseText);
+        document.getElementById("demo").innerHTML = myObj.Title;
+		document.getElementById("demo1").innerHTML = myObj.Ratings[0].Value;
+		document.getElementById("demo2").innerHTML = myObj.Ratings[1].Value;
+		document.getElementById("demo3").innerHTML = myObj.Metascore;
+    }
+  };
+  if(document.getElementById("userInput1").value)
+  {
+		var yearURL="&year="+document.getElementById("userInput1").value;
+		var userInput = document.getElementById("userInput").value;
+		var urlTitle=userInput;
+		var urlAPI="&apikey=ded58f02";
+		var baseUrl="http://www.omdbapi.com/?t="
+		var url=baseUrl+urlTitle+yearURL+urlAPI;
+  }
+  else
+  {
+		var userInput = document.getElementById("userInput").value;
+		var urlTitle=userInput;
+		var urlAPI="&apikey=ded58f02";
+		var baseUrl="http://www.omdbapi.com/?t="
+		var url=baseUrl+urlTitle+urlAPI;
+  }
+
+
+  /*var userInput = document.getElementById("userInput").value;
+  var urlTitle=userInput;
+  var urlAPI="&apikey=ded58f02";
+  var baseUrl="http://www.omdbapi.com/?t="
+  var url=baseUrl+urlTitle+urlAPI;*/
+  xhttp.open("GET", url , true);
+  //xhttp.open("GET", "http://www.omdbapi.com/?t=interstellar&apikey=ded58f02", true);
+  xhttp.send();
+
+  var NYhttp = new XMLHttpRequest();
+  NYhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+		var NYObj = JSON.parse(this.responseText);
+        document.getElementById("demo4").innerHTML = NYObj.results[0].link.url;
+		document.getElementById("demo5").innerHTML = NYObj.results[0].link.url;
+		document.getElementById("demo5").href = NYObj.results[0].link.url;
+    }
+  };
+
+  var nyBaseURL="https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=e992a0ab848147aea7e2cb85d44ea3df&query='";
+  var nyURL=nyBaseURL+document.getElementById("userInput").value+"'";
+  NYhttp.open("GET", nyURL, true);
+  NYhttp.send();
+
+}
+    </script>
+
+</body>
+</html>
