@@ -51,10 +51,63 @@
                         $('#input-star').rating('update', myObj.Ratings[0].Value);
                         document.getElementById("imdb_h3").innerHTML = myObj.Ratings[0].Value;
                         document.getElementById("RT_h3").innerHTML = myObj.Ratings[1].Value;
+                        //var metatemp = myObj.Ratings[2].Value.split('/');
+                        var metaRating = myObj.Metascore;
                         var imgLink = myObj.Poster;
                         document.getElementById("poster").src = imgLink;
                         document.getElementById("poster_block").style.visibility = 'visible';
                         document.getElementById("rating_block").style.visibility = 'visible';
+                        document.getElementById("myCanvas").style.visibility = 'hidden';
+
+
+                        //Metacritic rating logic
+                        if (metaRating >= 60) {
+                            document.getElementById("myCanvas").style.visibility = 'visible';
+                            document.getElementById("myCanvas").style.backgroundColor = 'green';
+                            var c = document.getElementById("myCanvas");
+                            var ctx = c.getContext("2d");
+                            ctx.clearRect(0, 0, c.width, c.height);
+                            ctx.fillStyle = "white";
+                            ctx.font = 'bolder 30px Arial';
+                            ctx.textAlign = "center";
+                            ctx.textBaseline = "middle";
+                            ctx.fillText(metaRating, c.width / 2, c.height / 2);
+                            ctx.stroke();
+                        }
+                        else if (metaRating >= 30 && metaRating < 60) {
+                            document.getElementById("myCanvas").style.visibility = 'visible';
+                            document.getElementById("myCanvas").style.backgroundColor = '#F6CA08';
+                            var c = document.getElementById("myCanvas");
+                            var ctx = c.getContext("2d");
+                            ctx.clearRect(0, 0, c.width, c.height);
+                            ctx.fillStyle = "white";
+                            ctx.font = 'bolder 30px Arial';
+                            ctx.textAlign = "center";
+                            ctx.textBaseline = "middle";
+                            ctx.fillText(metaRating, c.width / 2, c.height / 2);
+                            ctx.stroke();
+                        }
+                        else if (metaRating < 30) {
+                            
+                            document.getElementById("myCanvas").style.visibility = 'visible';
+                            document.getElementById("myCanvas").style.backgroundColor = 'red';
+                            var c = document.getElementById("myCanvas");
+                            var ctx = c.getContext("2d");
+                            ctx.clearRect(0, 0, c.width, c.height);
+                            ctx.fillStyle = "white";
+                            ctx.font = 'bolder 30px Arial';
+                            ctx.textAlign = "center";
+                            ctx.textBaseline = "middle";
+                            ctx.fillText(metaRating, c.width / 2, c.height / 2);
+                            ctx.stroke();
+                        }
+                        else {
+                            var c = document.getElementById("myCanvas");
+                            var ctx = c.getContext("2d");
+                            ctx.clearRect(0, 0, c.width, c.height);
+                            document.getElementById("myCanvas").style.visibility = 'hidden';
+                        }
+                        
                         
 
                         $(".prec").html("");
@@ -203,7 +256,9 @@
                             <img src="Metacritic.png" alt="Metacritic" height="100" width="100">
                         </div>
                         <div class="panel-body" style="min-height:200px; max-height:200px;">
-                            <p><strong>100</strong> Lorem</p>
+                            <br/>
+                            <canvas id="myCanvas" width="80" height="80" style="border:1px solid #d3d3d3;">
+                            </canvas>
 
                         </div>
 
