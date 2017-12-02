@@ -12,6 +12,13 @@
 
     <!-- Javascripts Charts CDN -->
     <script src="https://cdnjs.com/libraries/Chart.js"></script>
+    <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
+    <link href="themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="js/star-rating.js" type="text/javascript"></script>
+    <!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
+    <script src="themes/krajee-svg/theme.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -50,9 +57,33 @@ function loadDoc() {
         document.getElementById("demo").innerHTML = myObj.Title;
 		document.getElementById("demo1").innerHTML = myObj.Ratings[0].Value;
 		document.getElementById("demo2").innerHTML = myObj.Ratings[1].Value;
-		document.getElementById("demo3").innerHTML = myObj.Metascore;
+        document.getElementById("demo3").innerHTML = myObj.Metascore;
+        $('#input-star').rating('update', myObj.Ratings[0].Value);
+        document.getElementById("imdb_h3").innerHTML = myObj.Ratings[0].Value;
+        document.getElementById("RT_h3").innerHTML = myObj.Ratings[1].Value;
+
+
+
+        var rtRating = myObj.Ratings[1].Value.split("%");
+        document.getElementById("RTlogo").alt = rtRating[0];
+        if (rtRating[0] >= 60) {
+            document.getElementById("RTlogo").src = "Certified_Fresh.png";
+            document.getElementById("RTlogo").width = "125";
+            document.getElementById("RTlogo").height = "110";
+
+        }
+        else if (rtRating[0] < 60) {
+            document.getElementById("RTlogo").src = "rotten.jpg";
+            document.getElementById("RTlogo").width = "130";
+            document.getElementById("RTlogo").height = "98";
+        }
     }
-  };
+        };
+
+        $(document).on('ready', function () {
+            $('#input-star').rating({ displayOnly: true, step: 0.5 });
+        });
+
   if(document.getElementById("userInput1").value)
   {
 		var yearURL="&year="+document.getElementById("userInput1").value;
@@ -125,9 +156,7 @@ function loadDoc() {
     </div>
 
     <div class="container-fluid bg-grey">
-        <!--<h2>Our Values</h2>
-        <h4><strong>MISSION:</strong> Our mission lorem ipsum..</h4>
-        <p><strong>VISION:</strong> Our vision Lorem ipsum..-->
+        
         
         <div class="text-center">
             <h2>Movie Ratings</h2>
@@ -140,15 +169,14 @@ function loadDoc() {
                         <!--<h1>IMDB</h1>-->
                         <img src="IMDb-icon.png" alt="IMDb" height="100" width="100">
                     </div>
-                    <div class="panel-body">
-                        <p><strong>20</strong> Lorem</p>
-                        
+                    <div class="panel-body" style="min-height:200px; max-height:200px;">
+
+                        <!--<label for="input-1" class="control-label">Rate This</label>-->
+                        <input id="input-star" name="input-star" class="rating-loading" type="number" min="1" max="10" step="0.5" data-show-clear="false" data-size="sm" data-show-caption="false" displayOnly="true" data-readonly="true">
+                        <h3 id="imdb_h3"></h3>
+
                     </div>
-                    <div class="panel-footer">
-                        <h3>$19</h3>
-                        <h4>per month</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
+                    
                 </div>
             </div>
             <div class="col-sm-4">
@@ -156,15 +184,11 @@ function loadDoc() {
                     <div class="panel-heading">
                         <img src="Rotten_Tomatoes_logo_2.png" alt="RT" height="101" width="312">
                     </div>
-                    <div class="panel-body">
-                        <p><strong>50</strong> Lorem</p>
-                        
+                    <div class="panel-body" style="min-height:200px; max-height:200px;">
+                        <img id="RTlogo" alt="RTlogo" height="100" width="100">
+                        <h3 id="RT_h3"></h3>
                     </div>
-                    <div class="panel-footer">
-                        <h3>$29</h3>
-                        <h4>per month</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
+                    
                 </div>
             </div>
             <div class="col-sm-4">
@@ -176,11 +200,7 @@ function loadDoc() {
                         <p><strong>100</strong> Lorem</p>
                         
                     </div>
-                    <div class="panel-footer">
-                        <h3>$49</h3>
-                        <h4>per month</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

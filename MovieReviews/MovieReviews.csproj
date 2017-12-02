@@ -61,13 +61,46 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Certified_Fresh.png" />
+    <Content Include="css\star-rating.css" />
+    <Content Include="css\star-rating.min.css" />
     <Content Include="IMDb-icon.png" />
     <Content Include="Index.css" />
     <Content Include="Index.html" />
+    <Content Include="js\locales\ar.js" />
+    <Content Include="js\locales\de.js" />
+    <Content Include="js\locales\es.js" />
+    <Content Include="js\locales\fa.js" />
+    <Content Include="js\locales\fr.js" />
+    <Content Include="js\locales\it.js" />
+    <Content Include="js\locales\ko.js" />
+    <Content Include="js\locales\LANG.js" />
+    <Content Include="js\locales\pl.js" />
+    <Content Include="js\locales\pt-BR.js" />
+    <Content Include="js\locales\ro.js" />
+    <Content Include="js\locales\ru.js" />
+    <Content Include="js\locales\tr.js" />
+    <Content Include="js\locales\ua.js" />
+    <Content Include="js\locales\zh.js" />
+    <Content Include="js\star-rating.js" />
+    <Content Include="js\star-rating.min.js" />
     <Content Include="Metacritic.png" />
     <Content Include="Rotten-Tomatoes-logo.png" />
+    <Content Include="rotten.jpg" />
     <Content Include="Rotten_Tomatoes_logo_2.png" />
     <Content Include="Service1.svc" />
+    <Content Include="themes\krajee-fa\theme.css" />
+    <Content Include="themes\krajee-fa\theme.js" />
+    <Content Include="themes\krajee-fa\theme.min.css" />
+    <Content Include="themes\krajee-fa\theme.min.js" />
+    <Content Include="themes\krajee-svg\theme.css" />
+    <Content Include="themes\krajee-svg\theme.js" />
+    <Content Include="themes\krajee-svg\theme.min.css" />
+    <Content Include="themes\krajee-svg\theme.min.js" />
+    <Content Include="themes\krajee-uni\theme.css" />
+    <Content Include="themes\krajee-uni\theme.js" />
+    <Content Include="themes\krajee-uni\theme.min.css" />
+    <Content Include="themes\krajee-uni\theme.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
