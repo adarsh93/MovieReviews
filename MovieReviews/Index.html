@@ -11,181 +11,207 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Javascripts Charts CDN -->
-    <script src="https://cdnjs.com/libraries/Chart.js"></script>
+    <script src="Chart.js"></script>
+   
+    <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
+    <link href="themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="js/star-rating.js" type="text/javascript"></script>
+    <!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
+    <script src="themes/krajee-svg/theme.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
-    <h2>Movie Reviews</h2>
-
-    <label for="userInput">Movie Title:  </label><input type="text" id="userInput" ></input>
-    <label for="userInput1">Movie Year:  </label><input type="text" id="userInput1" ></input>
-    <button type="button" onclick="loadDoc()">Request data</button>
-
-    <br />
-    <br />
-    <label>Movie:  </label><label id="demo">should appear here</label>
-    <!--<p id="demo">should appear here</p>-->
-    <br />
-    <br />
-    <label>IMDB Rating:  </label><label id="demo1">should appear here1</label>
-    <br />
-    <br />
-    <label>Rotten Tomatoes Rating:  </label><label id="demo2">should appear here2</label>
-    <br />
-    <br />
-    <label>Metacritic Rating:  </label><label id="demo3">should appear here3</label>
-    <hr />
-    <br />
-    <h2>New York Times Review</h2>
-    <label>NYT Article Link:  </label><label id="demo4">should appear here4</label>
-    <br />
-    <a id="demo5" target="_blank">should appear here5</a>
-    <script>
-function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-		var myObj = JSON.parse(this.responseText);
-        document.getElementById("demo").innerHTML = myObj.Title;
-		document.getElementById("demo1").innerHTML = myObj.Ratings[0].Value;
-		document.getElementById("demo2").innerHTML = myObj.Ratings[1].Value;
-		document.getElementById("demo3").innerHTML = myObj.Metascore;
-    }
-  };
-  if(document.getElementById("userInput1").value)
-  {
-		var yearURL="&year="+document.getElementById("userInput1").value;
-		var userInput = document.getElementById("userInput").value;
-		var urlTitle=userInput;
-		var urlAPI="&apikey=ded58f02";
-		var baseUrl="http://www.omdbapi.com/?t="
-		var url=baseUrl+urlTitle+yearURL+urlAPI;
-  }
-  else
-  {
-		var userInput = document.getElementById("userInput").value;
-		var urlTitle=userInput;
-		var urlAPI="&apikey=ded58f02";
-		var baseUrl="http://www.omdbapi.com/?t="
-		var url=baseUrl+urlTitle+urlAPI;
-  }
-
-
-  /*var userInput = document.getElementById("userInput").value;
-  var urlTitle=userInput;
-  var urlAPI="&apikey=ded58f02";
-  var baseUrl="http://www.omdbapi.com/?t="
-  var url=baseUrl+urlTitle+urlAPI;*/
-  xhttp.open("GET", url , true);
-  //xhttp.open("GET", "http://www.omdbapi.com/?t=interstellar&apikey=ded58f02", true);
-  xhttp.send();
-
-  var NYhttp = new XMLHttpRequest();
-  NYhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-		var NYObj = JSON.parse(this.responseText);
-        document.getElementById("demo4").innerHTML = NYObj.results[0].link.url;
-		document.getElementById("demo5").innerHTML = NYObj.results[0].link.url;
-		document.getElementById("demo5").href = NYObj.results[0].link.url;
-    }
-  };
-
-  var nyBaseURL="https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=e992a0ab848147aea7e2cb85d44ea3df&query='";
-  var nyURL=nyBaseURL+document.getElementById("userInput").value+"'";
-  NYhttp.open("GET", nyURL, true);
-  NYhttp.send();
-
-        }
-
-       
-
-
-    </script>
-
-    <div class="jumbotron text-center">
-        <h1>Company</h1>
-        <p>We specialize in blablabla</p>
-        <form class="form-inline">
-            <div class="input-group">
-                <input type="email" class="form-control" size="50" placeholder="Email Address" required>
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-danger">Subscribe</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- Container (About Section) -->
-    <div class="container-fluid">
-        <h2>About Company Page</h2>
-        <h4>Lorem ipsum..</h4>
-        <p>Lorem ipsum..</p>
-        <button class="btn btn-default btn-lg">Get in Touch</button>
-    </div>
-
-    <div class="container-fluid bg-grey">
-        <!--<h2>Our Values</h2>
-        <h4><strong>MISSION:</strong> Our mission lorem ipsum..</h4>
-        <p><strong>VISION:</strong> Our vision Lorem ipsum..-->
-        
-        <div class="text-center">
-            <h2>Movie Ratings</h2>
-            <h4>Ratings across popular Movie review sites</h4>
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+           <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#directHere">
+                   <span class="icon-bar"</span>
+                   <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="#">Mashed-Potatoes</a>
+           </div>
+           <div class="collapse navbar-collapse" id="directHere">
+               <ul class="nav navbar-nav">
+                   <li class="active"><a href="#">Home</a></li>
+                   <li><a href="MoviesWebService.asmx" target="_blank">Upcoming Movies</a></li>
+               </ul>
+           </div>
         </div>
+</nav>
+
+        <script>
+            function loadDoc() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var myObj = JSON.parse(this.responseText);
+                        
+                        $('#input-star').rating('update', myObj.Ratings[0].Value);
+                        document.getElementById("imdb_h3").innerHTML = myObj.Ratings[0].Value;
+                        document.getElementById("RT_h3").innerHTML = myObj.Ratings[1].Value;
+                        var imgLink = myObj.Poster;
+                        document.getElementById("poster").src = imgLink;
+                        document.getElementById("poster_block").style.visibility = 'visible';
+                        document.getElementById("rating_block").style.visibility = 'visible';
+                        
+
+                        $(".prec").html("");
+
+                        //RT ratings image
+                        var rtRating = myObj.Ratings[1].Value.split("%");
+                        document.getElementById("RTlogo").alt = rtRating[0];
+                        if (rtRating[0] >= 60) {
+                            document.getElementById("RTlogo").src = "Certified_Fresh.png";
+                            document.getElementById("RTlogo").width = "125";
+                            document.getElementById("RTlogo").height = "110";
+
+                        }
+                        else if (rtRating[0] < 60) {
+                            document.getElementById("RTlogo").src = "rotten.jpg";
+                            document.getElementById("RTlogo").width = "130";
+                            document.getElementById("RTlogo").height = "98";
+                        }
+
+                    }
+                    else {
+                        //alert("Movie Not Found! Sorry!");
+                        document.getElementById("poster_block").style.visibility = 'hidden';
+                        document.getElementById("rating_block").style.visibility = 'hidden';
+                    }
+                };
+                $(document).on('ready', function () {
+                    $('#input-star').rating({ displayOnly: true, step: 0.5 });
+                });
+
+                
+                var userInput = document.getElementById("userInput").value;
+                var urlTitle = userInput;
+                var urlAPI = "&apikey=ded58f02";
+                var baseUrl = "http://www.omdbapi.com/?t="
+                var url = baseUrl + urlTitle + urlAPI;
+               
+                xhttp.open("GET", url, true);
+               
+                xhttp.send();
+
+                var NYhttp = new XMLHttpRequest();
+                NYhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var NYObj = JSON.parse(this.responseText);
+                        
+                        var urlTemp = NYObj.results[0].link.url.split(':');
+                        var urlForLoad = "https:" + urlTemp[1];
+                        document.getElementById("NYTquote").innerHTML = NYObj.results[0].summary_short;
+                        document.getElementById("NYTBlock").style.visibility = 'visible';
+                        document.getElementById("NYTLink").href = NYObj.results[0].link.url;
+                        document.getElementById("NYTLink").style.visibility = 'visible';
+                        document.getElementById("NYTPart").style.visibility = 'visible';
+
+                      
+                    }
+                    else {
+
+                        document.getElementById("NYTBlock").style.visibility = 'hidden';
+                        document.getElementById("NYTLink").style.visibility = 'hidden';
+                        document.getElementById("NYTPart").style.visibility = 'hidden';
+
+                    }
+                };
+
+                var nyBaseURL = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=e992a0ab848147aea7e2cb85d44ea3df&query='";
+                var nyURL = nyBaseURL + document.getElementById("userInput").value + "'";
+                NYhttp.open("GET", nyURL, true);
+                NYhttp.send();
+
+            }
+
+        </script>
+         
+
+        <div class="jumbotron text-center">
+            <h1>Mashed Potatoes</h1>
+            <p>Your one place for all Movie Reviews !</p>
+            <form class="form-inline">
+                <div class="input-group">
+                    <input type="text" id="userInput" class="form-control" size="50" placeholder="Enter the Movie Title" required>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-danger" onclick="loadDoc()">Go</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Container (About Section) -->
+    <div id="poster_block" class="container-fluid" style="visibility:hidden">
         <div class="row">
-            <div class="col-sm-4">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <!--<h1>IMDB</h1>-->
-                        <img src="IMDb-icon.png" alt="IMDb" height="100" width="100">
-                    </div>
-                    <div class="panel-body">
-                        <p><strong>20</strong> Lorem</p>
-                        
-                    </div>
-                    <div class="panel-footer">
-                        <h3>$19</h3>
-                        <h4>per month</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
-                </div>
+            <div class="col-sm-6">
+                <img id="poster" class="center-block" />
             </div>
-            <div class="col-sm-4">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <img src="Rotten_Tomatoes_logo_2.png" alt="RT" height="101" width="312">
-                    </div>
-                    <div class="panel-body">
-                        <p><strong>50</strong> Lorem</p>
-                        
-                    </div>
-                    <div class="panel-footer">
-                        <h3>$29</h3>
-                        <h4>per month</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <img src="Metacritic.png" alt="Metacritic" height="100" width="100">
-                    </div>
-                    <div class="panel-body">
-                        <p><strong>100</strong> Lorem</p>
-                        
-                    </div>
-                    <div class="panel-footer">
-                        <h3>$49</h3>
-                        <h4>per month</h4>
-                        <button class="btn btn-lg">Sign Up</button>
-                    </div>
-                </div>
+            <div class="col-sm-6" id="NYTPart" style="visibility:hidden">
+                <blockquote id="NYTBlock" class="blockquote blockquote-reverse" style="visibility:hidden">
+                    <p id="NYTquote" class="mb-0"></p>
+                    <footer class="blockquote-footer" ><cite title="Source Title">New York Times</cite></footer>
+                </blockquote>
+                <br/>
+                <p style="text-align:right"><a id="NYTLink" target="_blank">Click Here</a> to read the article.</p>
             </div>
         </div>
+            
+        </div>
+            
+        
 
-    </div>
+        <div id="rating_block" class="container-fluid bg-grey" style="visibility:hidden">
+
+            <div class="text-center">
+                <h2>Movie Ratings</h2>
+                <h4>Ratings across popular Movie review sites</h4>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-default text-center">
+                        <div class="panel-heading">
+                          
+                            <img src="IMDb-icon.png" alt="IMDb" height="100" width="100">
+                        </div>
+                        <div class="panel-body" style="min-height:200px; max-height:200px;">
+
+                            <input id="input-star" name="input-star" class="rating-loading" type="number" min="1" max="10" step="0.5" data-show-clear="false" data-size="sm" data-show-caption="false" displayOnly="true" data-readonly="true">
+                            <h3 id="imdb_h3"></h3>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default text-center">
+                        <div class="panel-heading">
+                            <img src="Rotten_Tomatoes_logo_2.png" alt="RT" height="101" width="312">
+                        </div>
+                        <div class="panel-body" style="min-height:200px; max-height:200px;">
+                            <img id="RTlogo" alt="RTlogo" height="100" width="100">
+                            <h3 id="RT_h3"></h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default text-center">
+                        <div class="panel-heading">
+                            <img src="Metacritic.png" alt="Metacritic" height="100" width="100">
+                        </div>
+                        <div class="panel-body" style="min-height:200px; max-height:200px;">
+                            <p><strong>100</strong> Lorem</p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
 </body>
