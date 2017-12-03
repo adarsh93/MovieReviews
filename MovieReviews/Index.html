@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="Index.css">
 
@@ -15,19 +16,23 @@
    
     <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
     <!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
+
     <link href="themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+
     <script src="js/star-rating.js" type="text/javascript"></script>
+
     <!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
     <script src="themes/krajee-svg/theme.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
            <div class="navbar-header">
                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#directHere">
-                   <span class="icon-bar"</span>
+                   <span class="icon-bar"></span>
                    <span class="icon-bar"></span>
                </button>
                <a class="navbar-brand" href="#">Mashed-Potatoes</a>
@@ -42,23 +47,22 @@
 </nav>
 
         <script>
+
             function loadDoc() {
+                //Setting the HTML elements values on response from OMDB API
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
                         var myObj = JSON.parse(this.responseText);
-                        
                         $('#input-star').rating('update', myObj.Ratings[0].Value);
                         document.getElementById("imdb_h3").innerHTML = myObj.Ratings[0].Value;
                         document.getElementById("RT_h3").innerHTML = myObj.Ratings[1].Value;
-                        //var metatemp = myObj.Ratings[2].Value.split('/');
                         var metaRating = myObj.Metascore;
                         var imgLink = myObj.Poster;
                         document.getElementById("poster").src = imgLink;
                         document.getElementById("poster_block").style.visibility = 'visible';
                         document.getElementById("rating_block").style.visibility = 'visible';
                         document.getElementById("myCanvas").style.visibility = 'hidden';
-
 
                         //Metacritic rating logic
                         if (metaRating >= 60) {
@@ -88,7 +92,6 @@
                             ctx.stroke();
                         }
                         else if (metaRating < 30) {
-                            
                             document.getElementById("myCanvas").style.visibility = 'visible';
                             document.getElementById("myCanvas").style.backgroundColor = 'red';
                             var c = document.getElementById("myCanvas");
@@ -107,10 +110,8 @@
                             ctx.clearRect(0, 0, c.width, c.height);
                             document.getElementById("myCanvas").style.visibility = 'hidden';
                         }
-                        
-                        
 
-                        $(".prec").html("");
+                        //$(".prec").html("");
 
                         //RT ratings image
                         var rtRating = myObj.Ratings[1].Value.split("%");
@@ -129,16 +130,18 @@
 
                     }
                     else {
-                        //alert("Movie Not Found! Sorry!");
+                        //if movie is not found, then hide elements
                         document.getElementById("poster_block").style.visibility = 'hidden';
                         document.getElementById("rating_block").style.visibility = 'hidden';
                     }
                 };
+
                 $(document).on('ready', function () {
                     $('#input-star').rating({ displayOnly: true, step: 0.5 });
                 });
 
-                
+
+                //sending GET request for OMDB API
                 var userInput = document.getElementById("userInput").value;
                 var urlTitle = userInput;
                 var urlAPI = "&apikey=ded58f02";
@@ -146,9 +149,9 @@
                 var url = baseUrl + urlTitle + urlAPI;
                
                 xhttp.open("GET", url, true);
-               
                 xhttp.send();
 
+                //Setting the HTML elements values on response from NYT API
                 var NYhttp = new XMLHttpRequest();
                 NYhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
@@ -173,6 +176,7 @@
                     }
                 };
 
+                //sending GET request for NYT API
                 var nyBaseURL = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=e992a0ab848147aea7e2cb85d44ea3df&query='";
                 var nyURL = nyBaseURL + document.getElementById("userInput").value + "'";
                 NYhttp.open("GET", nyURL, true);
@@ -196,7 +200,7 @@
             </form>
         </div>
 
-        <!-- Container (About Section) -->
+
     <div id="poster_block" class="container-fluid" style="visibility:hidden">
         <div class="row">
             <div class="col-sm-6">
@@ -211,13 +215,11 @@
                 <p style="text-align:right"><a id="NYTLink" target="_blank">Click Here</a> to read the article.</p>
             </div>
         </div>
-            
-        </div>
+     </div>
             
         
 
         <div id="rating_block" class="container-fluid bg-grey" style="visibility:hidden">
-
             <div class="text-center">
                 <h2>Movie Ratings</h2>
                 <h4>Ratings across popular Movie review sites</h4>
@@ -226,16 +228,12 @@
                 <div class="col-sm-4">
                     <div class="panel panel-default text-center">
                         <div class="panel-heading">
-                          
                             <img src="IMDb-icon.png" alt="IMDb" height="100" width="100">
                         </div>
                         <div class="panel-body" style="min-height:200px; max-height:200px;">
-
                             <input id="input-star" name="input-star" class="rating-loading" type="number" min="1" max="10" step="0.5" data-show-clear="false" data-size="sm" data-show-caption="false" displayOnly="true" data-readonly="true">
                             <h3 id="imdb_h3"></h3>
-
                         </div>
-                        
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -247,7 +245,6 @@
                             <img id="RTlogo" alt="RTlogo" height="100" width="100">
                             <h3 id="RT_h3"></h3>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -257,17 +254,12 @@
                         </div>
                         <div class="panel-body" style="min-height:200px; max-height:200px;">
                             <br/>
-                            <canvas id="myCanvas" width="80" height="80" style="border:1px solid #d3d3d3;">
-                            </canvas>
-
+                            <canvas id="myCanvas" width="80" height="80" style="border:1px solid #d3d3d3;"></canvas>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
-
 
 </body>
 </html>
