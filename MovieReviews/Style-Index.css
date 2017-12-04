@@ -46,3 +46,31 @@
     color: white;
     font-weight: bold;
 }
+
+h4{
+    text-align:center;
+    letter-spacing: center;
+    text-shadow:3px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+h1 {
+    text-align: center;
+    letter-spacing: center;
+    text-shadow: 3px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+h3 {
+    text-align: center;
+    letter-spacing: center;
+    text-shadow: 3px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+h2 {
+    text-align: center;
+    letter-spacing: center;
+    text-shadow: 3px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}

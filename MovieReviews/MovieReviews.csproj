@@ -69,7 +69,7 @@
     <Content Include="css\star-rating.css" />
     <Content Include="css\star-rating.min.css" />
     <Content Include="IMDb-icon.png" />
-    <Content Include="Index.css" />
+    <Content Include="Style-Index.css" />
     <Content Include="Index.html" />
     <Content Include="js\locales\ar.js" />
     <Content Include="js\locales\de.js" />
