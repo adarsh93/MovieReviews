@@ -64,6 +64,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="About.html" />
     <Content Include="Certified_Fresh.png" />
     <Content Include="Chart.js" />
     <Content Include="css\star-rating.css" />
