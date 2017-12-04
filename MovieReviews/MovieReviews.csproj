@@ -93,7 +93,7 @@
     <Content Include="Rotten-Tomatoes-logo.png" />
     <Content Include="rotten.jpg" />
     <Content Include="Rotten_Tomatoes_logo_2.png" />
-    <Content Include="Service1.svc" />
+    <Content Include="MovieReviews.svc" />
     <Content Include="themes\krajee-fa\theme.css" />
     <Content Include="themes\krajee-fa\theme.js" />
     <Content Include="themes\krajee-fa\theme.min.css" />
@@ -113,10 +113,10 @@
       <DependentUpon>MoviesWebService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
+    <Compile Include="MovieReviews.svc.cs">
+      <DependentUpon>MovieReviews.svc</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
+    <Compile Include="MovieReviews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
