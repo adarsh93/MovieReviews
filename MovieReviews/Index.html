@@ -27,6 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
+
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
@@ -46,134 +47,7 @@
         </div>
 </nav>
 
-        <script>
-
-            function loadDoc() {
-                //Setting the HTML elements values on response from OMDB API
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var myObj = JSON.parse(this.responseText);
-                        $('#input-star').rating('update', myObj.Ratings[0].Value);
-                        document.getElementById("imdb_h3").innerHTML = myObj.Ratings[0].Value;
-                        document.getElementById("RT_h3").innerHTML = myObj.Ratings[1].Value;
-                        var metaRating = myObj.Metascore;
-                        var imgLink = myObj.Poster;
-                        document.getElementById("poster").src = imgLink;
-                        document.getElementById("poster_block").style.visibility = 'visible';
-                        document.getElementById("rating_block").style.visibility = 'visible';
-                        document.getElementById("myCanvas").style.visibility = 'hidden';
-
-                        //Metacritic rating logic
-                        if (metaRating >= 60) {
-                            document.getElementById("myCanvas").style.visibility = 'visible';
-                            document.getElementById("myCanvas").style.backgroundColor = 'green';
-                            displayBox();
-                        }
-                        else if (metaRating >= 30 && metaRating < 60) {
-                            document.getElementById("myCanvas").style.visibility = 'visible';
-                            document.getElementById("myCanvas").style.backgroundColor = '#F6CA08';
-                            displayBox();
-                        }
-                        else if (metaRating < 30) {
-                            document.getElementById("myCanvas").style.visibility = 'visible';
-                            document.getElementById("myCanvas").style.backgroundColor = 'red';
-                            displayBox();
-                        }
-                        else {
-                            var c = document.getElementById("myCanvas");
-                            var ctx = c.getContext("2d");
-                            ctx.clearRect(0, 0, c.width, c.height);
-                            document.getElementById("myCanvas").style.visibility = 'hidden';
-                        }
-
-                        //$(".prec").html("");
-
-                        //RT ratings image
-                        var rtRating = myObj.Ratings[1].Value.split("%");
-                        document.getElementById("RTlogo").alt = rtRating[0];
-                        if (rtRating[0] >= 60) {
-                            document.getElementById("RTlogo").src = "Certified_Fresh.png";
-                            document.getElementById("RTlogo").width = "125";
-                            document.getElementById("RTlogo").height = "110";
-
-                        }
-                        else if (rtRating[0] < 60) {
-                            document.getElementById("RTlogo").src = "rotten.jpg";
-                            document.getElementById("RTlogo").width = "130";
-                            document.getElementById("RTlogo").height = "98";
-                        }
-
-                    }
-                    else {
-                        //if movie is not found, then hide elements
-                        document.getElementById("poster_block").style.visibility = 'hidden';
-                        document.getElementById("rating_block").style.visibility = 'hidden';
-                    }
-                };
-
-                function displayBox()
-                {
-                    var c = document.getElementById("myCanvas");
-                    var ctx = c.getContext("2d");
-                    ctx.clearRect(0, 0, c.width, c.height);
-                    ctx.fillStyle = "white";
-                    ctx.font = 'bolder 30px Arial';
-                    ctx.textAlign = "center";
-                    ctx.textBaseline = "middle";
-                    ctx.fillText(metaRating, c.width / 2, c.height / 2);
-                    ctx.stroke();
-                };
-
-                $(document).on('ready', function () {
-                    $('#input-star').rating({ displayOnly: true, step: 0.5 });
-                });
-
-
-                //sending GET request for OMDB API
-                var userInput = document.getElementById("userInput").value;
-                var urlTitle = userInput;
-                var urlAPI = "&apikey=ded58f02";
-                var baseUrl = "http://www.omdbapi.com/?t="
-                var url = baseUrl + urlTitle + urlAPI;
-               
-                xhttp.open("GET", url, true);
-                xhttp.send();
-
-                //Setting the HTML elements values on response from NYT API
-                var NYhttp = new XMLHttpRequest();
-                NYhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var NYObj = JSON.parse(this.responseText);
-                        
-                        var urlTemp = NYObj.results[0].link.url.split(':');
-                        var urlForLoad = "https:" + urlTemp[1];
-                        document.getElementById("NYTquote").innerHTML = NYObj.results[0].summary_short;
-                        document.getElementById("NYTBlock").style.visibility = 'visible';
-                        document.getElementById("NYTLink").href = NYObj.results[0].link.url;
-                        document.getElementById("NYTLink").style.visibility = 'visible';
-                        document.getElementById("NYTPart").style.visibility = 'visible';
-
-                      
-                    }
-                    else {
-
-                        document.getElementById("NYTBlock").style.visibility = 'hidden';
-                        document.getElementById("NYTLink").style.visibility = 'hidden';
-                        document.getElementById("NYTPart").style.visibility = 'hidden';
-
-                    }
-                };
-
-                //sending GET request for NYT API
-                var nyBaseURL = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=e992a0ab848147aea7e2cb85d44ea3df&query='";
-                var nyURL = nyBaseURL + document.getElementById("userInput").value + "'";
-                NYhttp.open("GET", nyURL, true);
-                NYhttp.send();
-
-            }
-
-        </script>
+        
          
 
         <div class="jumbotron text-center">
@@ -249,6 +123,136 @@
                 </div>
             </div>
         </div>
+
+    <script>
+
+        function loadDoc() {
+            //Setting the HTML elements values on response from OMDB API
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myObj = JSON.parse(this.responseText);
+                    $('#input-star').rating('update', myObj.Ratings[0].Value);
+                    document.getElementById("imdb_h3").innerHTML = myObj.Ratings[0].Value;
+                    document.getElementById("RT_h3").innerHTML = myObj.Ratings[1].Value;
+                    var metaRating = myObj.Metascore;
+                    var imgLink = myObj.Poster;
+                    document.getElementById("poster").src = imgLink;
+                    document.getElementById("poster_block").style.visibility = 'visible';
+                    document.getElementById("rating_block").style.visibility = 'visible';
+                    document.getElementById("myCanvas").style.visibility = 'hidden';
+
+                    //Metacritic rating logic
+                    if (metaRating >= 60) {
+                        document.getElementById("myCanvas").style.visibility = 'visible';
+                        document.getElementById("myCanvas").style.backgroundColor = 'green';
+                        displayBox();
+                    }
+                    else if (metaRating >= 30 && metaRating < 60) {
+                        document.getElementById("myCanvas").style.visibility = 'visible';
+                        document.getElementById("myCanvas").style.backgroundColor = '#F6CA08';
+                        displayBox();
+                    }
+                    else if (metaRating < 30) {
+                        document.getElementById("myCanvas").style.visibility = 'visible';
+                        document.getElementById("myCanvas").style.backgroundColor = 'red';
+                        displayBox();
+                    }
+                    else {
+                        var c = document.getElementById("myCanvas");
+                        var ctx = c.getContext("2d");
+                        ctx.clearRect(0, 0, c.width, c.height);
+                        document.getElementById("myCanvas").style.visibility = 'hidden';
+                    }
+
+                    //$(".prec").html("");
+
+                    //RT ratings image
+                    var rtRating = myObj.Ratings[1].Value.split("%");
+                    document.getElementById("RTlogo").alt = rtRating[0];
+                    if (rtRating[0] >= 60) {
+                        document.getElementById("RTlogo").src = "Certified_Fresh.png";
+                        document.getElementById("RTlogo").width = "125";
+                        document.getElementById("RTlogo").height = "110";
+
+                    }
+                    else if (rtRating[0] < 60) {
+                        document.getElementById("RTlogo").src = "rotten.jpg";
+                        document.getElementById("RTlogo").width = "130";
+                        document.getElementById("RTlogo").height = "98";
+                    }
+
+                }
+                else {
+                    //if movie is not found, then hide elements
+                    window.alert("Movie not found! Please try for another movie.");
+                    document.getElementById("poster_block").style.visibility = 'hidden';
+                    document.getElementById("rating_block").style.visibility = 'hidden';
+                }
+            };
+
+            function displayBox() {
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                ctx.clearRect(0, 0, c.width, c.height);
+                ctx.fillStyle = "white";
+                ctx.font = 'bolder 30px Arial';
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(metaRating, c.width / 2, c.height / 2);
+                ctx.stroke();
+            };
+
+            $(document).on('ready', function () {
+                $('#input-star').rating({ displayOnly: true, step: 0.5 });
+            });
+
+
+            //sending GET request for OMDB API
+            var userInput = document.getElementById("userInput").value;
+            var urlTitle = userInput;
+            var urlAPI = "&apikey=ded58f02";
+            var baseUrl = "http://www.omdbapi.com/?t="
+            var url = baseUrl + urlTitle + urlAPI;
+
+            xhttp.open("GET", url, true);
+            xhttp.send();
+
+            //Setting the HTML elements values on response from NYT API
+            var NYhttp = new XMLHttpRequest();
+            NYhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var NYObj = JSON.parse(this.responseText);
+
+                    var urlTemp = NYObj.results[0].link.url.split(':');
+                    var urlForLoad = "https:" + urlTemp[1];
+                    document.getElementById("NYTquote").innerHTML = NYObj.results[0].summary_short;
+                    document.getElementById("NYTBlock").style.visibility = 'visible';
+                    document.getElementById("NYTLink").href = NYObj.results[0].link.url;
+                    document.getElementById("NYTLink").style.visibility = 'visible';
+                    document.getElementById("NYTPart").style.visibility = 'visible';
+
+
+                }
+                else {
+
+                    window.alert("Movie not found in New York Times! Please try for another movie.");
+                    document.getElementById("NYTBlock").style.visibility = 'hidden';
+                    document.getElementById("NYTLink").style.visibility = 'hidden';
+                    document.getElementById("NYTPart").style.visibility = 'hidden';
+
+                }
+            };
+
+            //sending GET request for NYT API
+            var nyBaseURL = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=e992a0ab848147aea7e2cb85d44ea3df&query='";
+            var nyURL = nyBaseURL + document.getElementById("userInput").value + "'";
+            NYhttp.open("GET", nyURL, true);
+            NYhttp.send();
+
+        }
+
+    </script>
 
 </body>
 </html>

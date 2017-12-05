@@ -24,12 +24,21 @@ namespace MovieReviews
         [WebMethod]
         public DataSet UpcomingMoviesInXML(string month, int year)
         {
-            //string sql = "select * from movie where release_date like '" + month + "%' and release_year='" + year + "';";
-            string sql = "select distinct MovieName from movie where release_date like '" + month + "%' and release_year='" + year + "';";
-            SqlDataAdapter da = new SqlDataAdapter(sql, ConfigurationManager.ConnectionStrings["Connection"].ToString());
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            return ds;
+            try{
+                //string sql = "select * from movie where release_date like '" + month + "%' and release_year='" + year + "';";
+                string sql = "select movie_name from movie where release_date like '" + month + "%' and release_year='" + year + "';";
+                SqlDataAdapter da = new SqlDataAdapter(sql, ConfigurationManager.ConnectionStrings["Connection"].ToString());
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+                }
+            catch(Exception e)
+            {
+                string exception = Convert.ToString(e);
+                Console.WriteLine(exception);
+                return exception;
+}           }
+
         }
 
         [WebMethod]
