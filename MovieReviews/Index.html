@@ -25,7 +25,8 @@
     <script src="themes/krajee-svg/theme.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/js/my.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -185,18 +186,18 @@
                 NYhttp.send();
 
             }
-
+            
         </script>
          
 
         <div class="jumbotron text-center">
             <h1>Mashed Potatoes</h1>
-            <p>Your one place for all Movie Reviews !</p>
+            <p>Your one place for all Movie Reviews!</p>
             <form class="form-inline">
                 <div class="input-group">
-                    <input type="text" id="userInput" class="form-control" size="50" placeholder="Enter the Movie Title" required>
+                    <input type="text" id="userInput" class="form-control" size="50" placeholder="Enter the Movie Title">
                     <div class="input-group-btn">
-                        <button type="button" class="btn btn-danger" onclick="loadDoc()">Go</button>
+                        <button type="submit" class="btn btn-danger" onclick="loadDoc()">Go</button>
                     </div>
                 </div>
             </form>

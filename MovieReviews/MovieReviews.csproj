@@ -118,6 +118,7 @@
     <Compile Include="About_Us.aspx.designer.cs">
       <DependentUpon>About_Us.aspx</DependentUpon>
     </Compile>
+    <Compile Include="KeyDown.cs" />
     <Compile Include="MoviesWebService.asmx.cs">
       <DependentUpon>MoviesWebService.asmx</DependentUpon>
       <SubType>Component</SubType>
