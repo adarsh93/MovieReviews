@@ -24,8 +24,8 @@ namespace MovieReviews
         [WebMethod]
         public DataSet UpcomingMoviesInXML(string month, int year)
         {
-            //string sql = "select * from movie where release_date like '" + month + "%' and release_year='" + year + "';";
-            string sql = "select distinct MovieName from movie where release_date like '" + month + "%' and release_year='" + year + "';";
+            //string sql = "select * from movie where release_date like '" + month + "%' and release_year='" + year + "';"
+            string sql = "select distinct MonthName from movie where release_date like '" + month + "%' and release_year='" + year + "';";
             SqlDataAdapter da = new SqlDataAdapter(sql, ConfigurationManager.ConnectionStrings["Connection"].ToString());
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -43,10 +43,12 @@ namespace MovieReviews
                 da.Fill(ds);
                 return JsonConvert.SerializeObject(ds, Newtonsoft.Json.Formatting.Indented);
             }
-            catch(Exception e)
+
+            catch (Exception e)
             {
+
                 string exception = Convert.ToString(e);
-                Console.WriteLine("Some error occured - " +exception);
+                Console.WriteLine("Some error occured - " + exception);
                 return exception;
             }
         }
